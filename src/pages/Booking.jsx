@@ -34,7 +34,7 @@ const Booking = () => {
 
 
   const [visitors, setVisitors] = useState([
-    { name: "Visitor", id: 1, age: 18, price: 360, seatId: null }
+    { name: "Visitor", id: 1, age: 18, price: 360, seatId: null}
   ])
 
   const [currentVisitor, setCurrentVisitor] = useState(0)
@@ -53,44 +53,61 @@ const Booking = () => {
   const addVisitor = () => {
     const newId = visitors[visitors.length - 1].id + 1
     console.log(newId)
-    setVisitors([...visitors, { name: "Visitor", id: newId, age: 18, price: 360, seatId: null }])
+    setVisitors([...visitors, { name: "Visitor", id: newId, age: 18, price: 360, seatId: null}])
   }
 
 
+  const [receipt, setReceipt] = useState(false)
   const book = () => {
-    return (
-      <div>HEEEEEEY</div>
-    )
+    const seatsChoosen = visitors.every(e => e.seatId !== null)
+    if (seatsChoosen) {
+      console.log(visitors)
+      setReceipt(true)
+    } 
   }
+
+  const onChangeAge = (index, event) => {
+    const newVisitors = [...visitors]
+    newVisitors[index].age = parseInt(event.target.value)
+    setVisitors(newVisitors)
+  }
+  
 
 
   return (
     <div>
-      <div>{movie?.title}</div>
-      <div>{date}</div>
-      <div>{hour}:00</div>
-      <div>{screening?.auditoriumId === 1 ? "Big" : "Small"} auditorium</div>
-      <br />
-      <div className='visitors'>
-        {visitors.map(visitor => (
-          <div key={visitor.id} className='visitor'>
-            <div>{visitor.name} {visitor.id}</div>
-            <input type="number" placeholder='Age' />
-            <div>price: {visitor.price}</div>
-          </div>
-        ))}
+      <div>
+        <div>{movie?.title}</div>
+        <div>{date}</div>
+        <div>{hour}:00</div>
+        <div>{screening?.auditoriumId === 1 ? "Big" : "Small"} auditorium</div>
+        <br />
+        <div className='visitors'>
+          {visitors.map((visitor, index) => (
+            <div key={visitor.id} className='visitor'>
+              <div>{visitor.name} {visitor.id}</div>
+              <input min="3" onChange={(event) => onChangeAge(index, event)} type="number" placeholder='Age' />
+              <div>price: {visitor.price}</div>
+              <div>seat: {visitor.seatId === null ? "Not Choosen": visitor.seatId}</div>
+            </div>
+          ))}
 
+        </div>
+        <button onClick={addVisitor}>Add visitor</button>
+        <br />
+        <br />
+        <div className={(currentVisitor === visitors.length) ? "invisible" : ""}>Visitor {currentVisitor + 1} please choose a seat</div>
+        <div className={(currentVisitor === visitors.length) ? "invisible" : "seatsContainer"}>
+          {seats.map(e => (
+            <Seat key={e.id} seatObj={e} onSelectSeat={handleSeatClick} />
+          ))}
+        </div>
+        <button onClick={book}>Book</button>
       </div>
-      <button onClick={addVisitor}>Add visitor</button>
-      <br />
-      <br />
-      <div className={(currentVisitor === visitors.length) ? "invisible" : ""}>Visitor {currentVisitor + 1} please choose a seat</div>
-      <div className={(currentVisitor === visitors.length) ? "invisible" : "seatsContainer"}>
-        {seats.map(e => (
-          <Seat key={e.id} seatObj={e} onSelectSeat={handleSeatClick} />
-        ))}
-      </div>
-      <button onClick={book}>Book</button>
+
+      {receipt && (<div className='overlay'>
+        <div className='receipt'>RECEIPT</div>
+      </div>)}
     </div>
 
   )
