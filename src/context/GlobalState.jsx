@@ -9,6 +9,8 @@ const GlobalProvider = ({ children }) => {
     screenings: [],
     movieCategories: [],
     occupiedSeats: [],
+    isLoading: true
+
   });
 
   useEffect(() => {
@@ -17,8 +19,9 @@ const GlobalProvider = ({ children }) => {
       const screenings = await getTable("screenings");
       const movieCategories = await getTable("categories");
       const occupiedSeats = await getTable("occupied_seats");
+      const isLoading = false;
 
-      setState({ movies, screenings, movieCategories, occupiedSeats });
+      setState({ movies, screenings, movieCategories, occupiedSeats, isLoading });
     })();
   }, []);
 

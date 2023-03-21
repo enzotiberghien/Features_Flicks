@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Welcome />}></Route>
           <Route path="/movies" element={<Movies />}></Route>
           <Route path="/screenings" element={<Screenings />}></Route>
-          <Route path="/booking/:id" element={<Booking />} />
+          <Route path="/booking/:id" element={<Booking />} /> 
         </Routes>
       </Router>
     </GlobalProvider>

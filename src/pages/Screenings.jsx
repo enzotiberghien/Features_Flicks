@@ -2,15 +2,18 @@ import { getTable } from '../utils/fetchAPI'
 import React, { useEffect, useState, useContext } from 'react'
 import ScreeningDay from '../components/ScreeningDay'
 import { GlobalContext } from "../context/GlobalState";
+import Header from '../components/Header';
+import Spinner from '../components/Spinner';
 
 
 
 const Screenings = () => {
-  const { screenings, movies, movieCategories } = useContext(GlobalContext);
+  const { screenings, movies, movieCategories, isLoading } = useContext(GlobalContext);
+
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  const [dateRange, setDateRange] = useState([0, 5])
 
   const day = () => {
     const groups = {}
@@ -18,7 +21,7 @@ const Screenings = () => {
       const date = screening.time.slice(0, 10)
       const hour = screening.time.slice(11, 13)
       const movie = movies.find(movie => movie.id === screening.movieId)
-      if (selectedCategory && movie && !movie.description.categories.includes(selectedCategory)) {
+      if (selectedCategory && movie && !movie.description.categories.inFudes(selectedCategory)) {
         // If a category is selected and the movie doesn't match, skip this screening
         return
       }
@@ -44,22 +47,30 @@ const Screenings = () => {
 
   return (
     <div>
-      <input type="date" onChange={e => setSelectedDate(e.target.value)} />
-      <select name="category" id="category" onChange={e => setSelectedCategory(e.target.value)}>
-        <option value="">All categories</option>
-        {movieCategories.map(movieCat => (
-          <option key={movieCat.title} value={movieCat.title}>{movieCat.title}</option>
-        ))}
-      </select>
+      <Header></Header>
+      {isLoading && <Spinner />}
 
-      {selectedDate && day()[selectedDate] && (
-        <ScreeningDay day={day()} date={selectedDate} />
-      )}
+      <div id='screenings'>
+        {!isLoading && <div id='filters'>
+          <input type="date" onChange={e => setSelectedDate(e.target.value)} />
+          <select name="category" id="category" onChange={e => setSelectedCategory(e.target.value)}>
+            <option value="">All categories</option>
+            {movieCategories.map(movieCat => (
+              <option key={movieCat.title} value={movieCat.title}>{movieCat.title}</option>
+            ))}
+          </select>
+        </div>}
 
-      {!selectedDate && Object.keys(day()).map(date => (
-        <ScreeningDay key={date} day={day()} date={date} />
-      ))}
+        {selectedDate && day()[selectedDate] && !isLoading(
+          <ScreeningDay day={day()} date={selectedDate} />
+        )}
 
+        {!selectedDate && !isLoading && Object.keys(day()).map((date, i) => {
+          if(i < dateRange[1] && i >= dateRange[0]) return (<ScreeningDay key={date} day={day()} date={date} />)
+        } )}
+          
+
+      </div>
     </div>
   )
 }

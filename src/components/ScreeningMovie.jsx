@@ -24,16 +24,16 @@ const ScreeningMovie = ({ screening }) => {
   
 
   return (
-    <div>
+    <div className='screeningMovie'>
       <li>
         <div>
           <img src={"https://cinema-rest.nodehill.se/" + movie.description.posterImage} alt="" />
         </div>
         <div className='movie-desc'>
-          <div>{movie.title} | {timeConvert(movie.description.length)}</div>
+          <div className='title'>{movie.title} | {timeConvert(movie.description.length)}</div>
           <div>{movie.description.categories.join(", ")}</div>
           <div>{screening.auditoriumId === 1 ? "Big" : "Small"} auditorium</div>
-          <button onClick={onClick}>Book</button>
+          <button className='btn' onClick={onClick}>Book</button>
         </div>
       </li>
     </div>

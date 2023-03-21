@@ -10,13 +10,13 @@ const ScreeningDay = ({ day, date }) => {
   const filteredMovies = movies.filter(movie => !selectedCategory || movie.description.categories.includes(selectedCategory));
 
   return (
-    <div>
+    <div id='screeningDay'>
       <div>
-        <h3>{date}</h3>
+        <h3 className='dates'>{date}</h3>
         {Object.keys(day[date]).map(hour => (
-          <div key={hour}>
+          <div className='hours' key={hour}>
             <h4>{hour}:00</h4>
-            <ul>
+            <ul className='hourly'>
               {day[date][hour].map(screening => {
                 const movie = filteredMovies.find(movie => movie.id === screening.movieId);
                 if (!movie) {
