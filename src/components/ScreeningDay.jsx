@@ -8,11 +8,12 @@ const ScreeningDay = ({ day, date }) => {
   const { movies, selectedCategory } = useContext(GlobalContext);
 
   const filteredMovies = movies.filter(movie => !selectedCategory || movie.description.categories.includes(selectedCategory));
+  const dayOfWeek = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
 
   return (
     <div id='screeningDay'>
       <div>
-        <h3 className='dates'>{date}</h3>
+        <h3 className='dates'>{date} ({dayOfWeek})</h3>
         {Object.keys(day[date]).map(hour => (
           <div className='hours' key={hour}>
             <h4>{hour}:00</h4>

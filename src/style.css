@@ -118,6 +118,40 @@ ul {
   font-size: 2.4rem;
 }
 
+
+
+
+/* animation */
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter h1 {
+  color: #fff;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid rgb(136, 12, 127); /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color:  white}
+}
+
+
+
+
+
+
 #welcome-container p {
   font-size: 1.2rem;
 }
@@ -259,6 +293,13 @@ option {
   width: 10vw;
 }
 
+@media only screen and (max-width: 750px) {
+  #screenings img {
+    height: 30vh;
+    width: 20vw;
+  }
+}
+
 #screenings .btn {
   width: fit-content;
   outline: none;
@@ -269,6 +310,23 @@ option {
   border: none;
   padding: 0.8vw 2.4vw;
   font-size: 1.1rem;
+}
+
+
+#screenings .btn:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 30px rgba(2, 119, 189, 1);
+}
+
+@media only screen and (max-width: 700px) {
+  #screenings img {
+    height: 30vh;
+    width: 30vw;
+  }
+
+  #screenings .btn {
+    padding: 3% 15%;
+  }
 }
 
 li {
@@ -319,10 +377,12 @@ li {
 
 .booking-card-text * {
   margin-bottom: 3%;
+  font-size: 1.2rem;
 }
 
 .booking-card img {
   width: 30%;
+  height: 45vh;
   border-radius: 10px;
 }
 
@@ -332,7 +392,7 @@ li {
 }
 
 .booking-card-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 
@@ -356,7 +416,8 @@ li {
 .btn-container {
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  min-width: 50%;
 }
 
 .visitors button {
@@ -402,6 +463,8 @@ li {
   gap: 3vh 1vh;
   justify-content: center;
 }
+
+
 
 .screen {
   border: 2px solid rgba(2, 119, 189, 1);
@@ -497,8 +560,10 @@ li {
 
 .total-container {
   display: flex;
-  justify-content: end;
   font-weight: 700;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 5%;
 }
 
 .total-container * {
@@ -529,7 +594,7 @@ li {
   width: 50vw;
   background: linear-gradient(to bottom, #000000 0%, #130936 100%);
   border-radius: 10px;
-  box-shadow: 1px 1px 30px rgba(2, 119, 189, 1);
+  box-shadow: 1px 1px 10px rgba(2, 119, 189, 1);
   padding: 2%;
 }
 
@@ -624,4 +689,90 @@ body.modal-open {
   100% {
     stroke-dasharray: 126 126;
   }
+}
+
+
+/* Pagination */
+
+.pagination-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 30vw;
+  margin: auto;
+  margin-bottom: 7%;
+}
+
+.pagination-btn {
+  min-width: 10vw;
+  max-width: 20vw;
+  outline: none;
+  border-radius: 25px;
+  background: linear-gradient(to top right, rgba(63, 81, 181, 1) 0%, rgba(3, 155, 229, 1) 40%);
+  box-shadow: 1px 1px 10px rgba(2, 119, 189, 1);
+  color: white;
+  border: none;
+  padding: 0.8vw 2.4vw;
+  font-size: 1.1rem;
+}
+
+.pagination-btn:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 30px rgba(2, 119, 189, 1);
+
+}
+
+
+
+
+/* Movies page */
+
+.movie-container {
+  margin: 5% 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  row-gap: 3vw;
+  align-items: center;
+  width: 98vw;
+  justify-content: center;
+}
+
+.movie {
+  background-color: #0E0B16;
+  color: #fff;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  margin: auto;
+  max-height: fit-content;
+  width: 200px;
+  height: 300px;
+  /* margin-bottom: 10%; */
+}
+
+.movie-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.movie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.movie:hover .movie-brand {
+  opacity: 1;
+  background-color: #000000ca;
 }

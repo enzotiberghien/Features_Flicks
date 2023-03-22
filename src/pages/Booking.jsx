@@ -106,7 +106,7 @@ const Booking = () => {
     }
     return no;
   }
-  
+
 
   return (
     <div className='booking-container'>
@@ -117,7 +117,7 @@ const Booking = () => {
         <img src={"https://cinema-rest.nodehill.se/" + movie?.description.posterImage} alt="" />
         <div className='booking-card-text'>
           <div className='booking-card-title'>{movie?.title}</div>
-          <div className='booking-card-date'>{date}</div>
+          <div className='booking-card-date'>{date} ({new Date(date).toLocaleDateString('en-US', { weekday: 'long' })})</div>
           <div className='booking-card-hour'>{hour}:00</div>
           <div className='booking-card-room'>{screening?.auditoriumId === 1 ? "Big" : "Small"} auditorium</div>
         </div>
@@ -133,11 +133,11 @@ const Booking = () => {
           </div>
         ))}
         <div className='total-container'>
+          <div className='btn-container'>
+            <button onClick={addVisitor}>Add visitor</button>
+          </div>
           <div className='total-text'>Total:</div>
           <div>{totalAmount} SEK</div>
-        </div>
-        <div className='btn-container'>
-          <button onClick={addVisitor}>Add visitor</button>
         </div>
       </div>}
 

@@ -14,6 +14,7 @@ const Screenings = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [dateRange, setDateRange] = useState([0, 5])
+  const pagesBtns = ["Previous", "Next"]
 
   const day = () => {
     const groups = {}
@@ -21,7 +22,7 @@ const Screenings = () => {
       const date = screening.time.slice(0, 10)
       const hour = screening.time.slice(11, 13)
       const movie = movies.find(movie => movie.id === screening.movieId)
-      if (selectedCategory && movie && !movie.description.categories.inFudes(selectedCategory)) {
+      if (selectedCategory && movie && !movie.description.categories.includes(selectedCategory)) {
         // If a category is selected and the movie doesn't match, skip this screening
         return
       }
@@ -61,14 +62,31 @@ const Screenings = () => {
           </select>
         </div>}
 
-        {selectedDate && day()[selectedDate] && !isLoading(
+        {selectedDate && day()[selectedDate] && !isLoading && (
           <ScreeningDay day={day()} date={selectedDate} />
         )}
 
         {!selectedDate && !isLoading && Object.keys(day()).map((date, i) => {
-          if(i < dateRange[1] && i >= dateRange[0]) return (<ScreeningDay key={date} day={day()} date={date} />)
-        } )}
-          
+          if (i < dateRange[1] && i >= dateRange[0]) {
+            return (<ScreeningDay day={day()} date={date} />)
+          }
+        })}
+
+
+
+        <div className='pagination-btns'>
+          {!isLoading && pagesBtns.map(e => (
+            <button className='pagination-btn' onClick={() => {
+              if (dateRange[0] === 0 && e === "Previous") return;
+              else if (dateRange[1] >= Object.keys(day()).length && e === "Next") return;
+              else if (e === "Previous") setDateRange([dateRange[0] - 5, dateRange[1] - 5]);
+              else setDateRange([dateRange[0] + 5, dateRange[1] + 5]);
+            }}>
+              {e}
+            </button>
+
+          ))}
+        </div>
 
       </div>
     </div>
