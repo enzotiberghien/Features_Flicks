@@ -129,7 +129,7 @@ const Booking = () => {
             <div>{visitor.name} {visitor.id}</div>
             <input min="3" onChange={(event) => onChangeAge(index, event)} type="number" placeholder='Age' />
             <div>seat: {visitor.seatId === null ? "?" : visitor.seatId}</div>
-            <div>price: {visitor.price} SEK</div>
+            <div>{visitor.price} SEK</div>
           </div>
         ))}
         <div className='total-container'>
@@ -182,7 +182,7 @@ const Booking = () => {
                 <div>{visitor.name} {visitor.id}</div>
                 <div className="age">{visitor.age}</div>
                 <div>seat: {visitor.seatId === null ? "?" : visitor.seatId}</div>
-                <div>price: {visitor.price} SEK</div>
+                <div>{visitor.price} SEK</div>
               </div>
             ))}
             <div className='total-container'>

@@ -66,6 +66,10 @@ const Screenings = () => {
           <ScreeningDay day={day()} date={selectedDate} />
         )}
 
+        {selectedDate && !day()[selectedDate] && !isLoading && (
+          <div className='filler'>No Screening Found</div>
+        )}
+
         {!selectedDate && !isLoading && Object.keys(day()).map((date, i) => {
           if (i < dateRange[1] && i >= dateRange[0]) {
             return (<ScreeningDay day={day()} date={date} />)
@@ -75,7 +79,7 @@ const Screenings = () => {
 
 
         <div className='pagination-btns'>
-          {!isLoading && pagesBtns.map(e => (
+          {!isLoading && day()[selectedDate] && pagesBtns.map(e => (
             <button className='pagination-btn' onClick={() => {
               if (dateRange[0] === 0 && e === "Previous") return;
               else if (dateRange[1] >= Object.keys(day()).length && e === "Next") return;

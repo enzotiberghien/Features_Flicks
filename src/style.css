@@ -9,6 +9,7 @@
 }
 
 body {
+  scroll-margin-bottom: 0;
   margin-top: 90px;
   font-family: 'Familjen Grotesk', sans-serif;
   background: linear-gradient(to bottom, #000000 0%, #1a0827 100%);
@@ -42,7 +43,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
-  height: 90px;
+  min-height: 90px;
   padding: 0 30px;
 }
 
@@ -51,6 +52,8 @@ ul {
 .logo {
   width: 210px;
   height: auto;
+  z-index: 999;
+  background-color: black;
 }
 
 .logo img {
@@ -63,10 +66,6 @@ ul {
 
 .desktop-main-menu {
   margin-right: 50px;
-}
-
-.desktop-main-menu ul {
-  display: flex;
 }
 
 .desktop-main-menu ul li {
@@ -97,6 +96,65 @@ ul {
 }
 
 
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  height: 20px;
+
+}
+
+.inactive {
+  display: flex;
+}
+
+.active {
+  display: flex;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .hamburger {
+    display: block;
+  }
+
+  .inactive {
+    opacity: 0;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  }
+
+  .active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    background-color: black;
+  }
+
+
+  .main-header {
+    flex-direction: column;
+    align-items: start;
+    background-color: black;
+    height: 30px;
+  }
+
+  .desktop-main-menu ul {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    width: 100%;
+    margin-top: 4%;
+    width: fit-content;
+    /* padding: 3% 0; */
+  }
+}
+
+
+
+
 /* Welcome Section */
 
 #welcome-container {
@@ -117,38 +175,6 @@ ul {
 #welcome-container h1 {
   font-size: 2.4rem;
 }
-
-
-
-
-/* animation */
-
-/* DEMO-SPECIFIC STYLES */
-.typewriter h1 {
-  color: #fff;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid rgb(136, 12, 127); /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  animation: 
-    typing 3.5s steps(30, end),
-    blink-caret .5s step-end infinite;
-}
-
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color:  white}
-}
-
-
-
 
 
 
@@ -208,7 +234,23 @@ ul {
 }
 
 
+@media only screen and (max-width: 600px) {
+  .btn {
+    width: 40vw;
+    outline: none;
+    border-radius: 25px;
+    background: linear-gradient(to top right, rgba(63, 81, 181, 1) 0%, rgba(3, 155, 229, 1) 40%);
+    box-shadow: 1px 1px 30px rgba(2, 119, 189, 1);
+    color: white;
+    border: none;
+    padding: 6% 12%;
+    font-size: 1.3rem;
+  }
+}
 
+.span-orange {
+  color: rgb(12, 177, 226);
+}
 
 
 /* Screenings */
@@ -367,7 +409,7 @@ li {
 
 .booking-card {
   display: flex;
-  width: 50vw;
+  min-width: 50vw;
   background-color: #020a2471;
   margin-bottom: 5vh;
   padding: 2%;
@@ -386,6 +428,8 @@ li {
   border-radius: 10px;
 }
 
+
+
 .booking-card-text {
   width: 70%;
   padding-left: 4%;
@@ -393,6 +437,27 @@ li {
 
 .booking-card-title {
   font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .booking-card {
+    width: 90vw;
+  }
+
+  .booking-card img {
+    width: 30vw;
+    height: 40vh;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .booking-card img {
+    width: 30vw;
+    height: 30vh;
+    border-radius: 10px;
+  }
 }
 
 
@@ -438,6 +503,37 @@ li {
 }
 
 
+@media only screen and (max-width: 1200px) {
+  .visitor {
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .visitor {
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .visitors button {
+    width: fit-content;
+    outline: none;
+    border-radius: 25px;
+    background: linear-gradient(to top right, rgba(63, 81, 181, 0) 0%, rgba(3, 154, 229, 0) 40%);
+    box-shadow: 1px 1px 10px rgba(2, 119, 189, 1);
+    border: 2px solid rgba(2, 119, 189, 1);
+    color: white;
+    padding: 1.6vw 5vw;
+    font-size: 1.1rem;
+  }
+}
+
 
 /* Seats */
 
@@ -460,7 +556,7 @@ li {
   font-size: 1.5vw;
   width: fit-content;
   /* height: fit-content; */
-  gap: 3vh 1vh;
+  gap: 2vh 0.7vh;
   justify-content: center;
 }
 
@@ -512,6 +608,49 @@ li {
   border: 2px solid red;
   box-shadow: 1px 1px 10px red;
 
+}
+
+@media only screen and (max-width: 1200px) {
+  .seatsContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    font-size: 1.5vw;
+    width: fit-content;
+    /* height: fit-content; */
+    gap: 1vh 0.5vh;
+    justify-content: center;
+  }
+
+  .seats {
+    width: 6vw;
+    height: 6vw;
+    color: white;
+    background-color: rgba(0, 128, 0, 0);
+    border: 2px solid rgba(2, 119, 189, 1);
+    box-shadow: 1px 1px 10px rgba(2, 119, 189, 1);
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  .occupied {
+    width: 6vw;
+    height: 6vw;
+    color: white;
+    font-size: 0.8rem;
+
+    background-color: rgba(255, 0, 0, 0);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+    box-shadow: 1px 1px 10px red;
+
+  }
 }
 
 .occupied:hover {
@@ -599,6 +738,7 @@ li {
 }
 
 
+
 .modal {
   display: flex;
   border-radius: 10px 10px 0 0;
@@ -606,7 +746,20 @@ li {
 
 .modal img {
   width: 30%;
-  height: 40vh;
+  height: 30vh;
+}
+
+@media only screen and (max-width: 900px) {
+  .receipt {
+    width: 90vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .modal img {
+    width: 35vw;
+    height: 35vh;
+  }
 }
 
 .modal-text {
@@ -640,26 +793,6 @@ body.modal-open {
 
 /* Spinner */
 
-/* .loader {
-  border: 10px solid white;
-  border-top: 10px solid #3498db;
-  box-shadow: 1px 1px 30px #3498db;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-  margin: auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}  */
-
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -668,24 +801,29 @@ body.modal-open {
 .spinner {
   animation: Rotate 2.4s both infinite linear;
 }
+
 .path {
   animation: DrawLine 1.6s both infinite alternate linear;
   fill: none;
   stroke: white;
   stroke-width: 50;
 }
+
 @keyframes Rotate {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @keyframes DrawLine {
   0% {
     stroke-dasharray: 0 126;
   }
+
   100% {
     stroke-dasharray: 126 126;
   }
@@ -715,6 +853,29 @@ body.modal-open {
   font-size: 1.1rem;
 }
 
+@media only screen and (max-width: 900px) {
+  .pagination-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    margin: auto;
+    margin-bottom: 7%;
+  }
+
+  .pagination-btn {
+    min-width: 30vw;
+    /* max-width: 50vw; */
+    outline: none;
+    border-radius: 25px;
+    background: linear-gradient(to top right, rgba(63, 81, 181, 1) 0%, rgba(3, 155, 229, 1) 40%);
+    box-shadow: 1px 1px 10px rgba(2, 119, 189, 1);
+    color: white;
+    border: none;
+    padding: 2vw 4.4vw;
+    font-size: 1.1rem;
+  }
+}
+
 .pagination-btn:hover {
   cursor: pointer;
   box-shadow: 1px 1px 30px rgba(2, 119, 189, 1);
@@ -736,6 +897,7 @@ body.modal-open {
   justify-content: center;
 }
 
+
 .movie {
   background-color: #0E0B16;
   color: #fff;
@@ -746,6 +908,39 @@ body.modal-open {
   width: 200px;
   height: 300px;
   /* margin-bottom: 10%; */
+}
+
+.filler {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .movie-container {
+    margin: 5% 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    row-gap: 8vw;
+    align-items: center;
+    width: 96vw;
+    justify-content: center;
+  }
+
+  .movie {
+    background-color: #0E0B16;
+    color: #fff;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    margin: auto;
+    max-height: fit-content;
+    width: 300px;
+    height: 400px;
+    /* margin-bottom: 10%; */
+  }
 }
 
 .movie-brand {
