@@ -13,7 +13,7 @@ const Header = () => {
       <header className="main-header">
         <div className="logo">
           <a href="/">
-            <img src="../src/imgs/logo.png" />
+            <img src="../imgs/logo.png" />
           </a>
         </div>
         <img className='hamburger' onClick={handleShowNavbar} src="https://w7.pngwing.com/pngs/626/110/png-transparent-black-logo-computer-icons-hamburger-button-menu-new-menu-angle-text-rectangle.png" alt="" />
