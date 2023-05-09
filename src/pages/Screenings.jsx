@@ -79,7 +79,7 @@ const Screenings = () => {
 
 
         <div className='pagination-btns'>
-          {!isLoading && day()[selectedDate] && pagesBtns.map(e => (
+          {!isLoading && pagesBtns.map(e => (
             <button className='pagination-btn' onClick={() => {
               if (dateRange[0] === 0 && e === "Previous") return;
               else if (dateRange[1] >= Object.keys(day()).length && e === "Next") return;
